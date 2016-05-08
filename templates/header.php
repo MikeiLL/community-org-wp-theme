@@ -1,10 +1,12 @@
-<header class="mdl-layout__header mdl-color--grey-800 mdl-color-text--grey-50">
+<header class="mdl-layout__header mdl-layout__header--waterfall">
   <div class="mdl-layout__header-row">
     <!-- Title -->
     <a class="mdl-layout-title" href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
     <!-- Add spacer, to align navigation to the right -->
     <div class="mdl-layout-spacer"></div>
+  </div>
     <!-- Navigation -->
+    <div class="mdl-layout__header-row">
     <?php
     if ( has_nav_menu( 'header_navigation' ) ) :
 
@@ -25,6 +27,7 @@
     ?>
   </div>
 </header>
+
 <div class="mdl-layout__drawer">
   <a class="mdl-layout-title" href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
 
