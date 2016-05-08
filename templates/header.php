@@ -5,6 +5,11 @@
     <!-- Add spacer, to align navigation to the right -->
     <div class="mdl-layout-spacer"></div>
   </div>
+    <div class="mdl-layout__header-row">
+    <!-- Title -->
+    <a class="mdl-layout-subtitle" href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('description'); ?></a>
+    <!-- Add spacer, to align navigation to the right -->
+  </div>
     <!-- Navigation -->
     <div class="mdl-layout__header-row">
     <?php
