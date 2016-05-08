@@ -1,5 +1,7 @@
 <?php
 
+use Roots\Sage\Extras;
+
 /**
  * Creates the Board and Floor Minutes post types.
  * This file also registers functions for filtering these
@@ -17,7 +19,7 @@
  *
  * This file follows the coding standards detailed here:
  * http://codex.wordpress.org/WordPress_Coding_Standards
- * from https://github.com/CIF-Rochester/Website/tree/master/wp-content/themes/cif/semesterly-post-types
+ * from https://github.com/HBC-Rochester/Website/tree/master/wp-content/themes/cif/semesterly-post-types
  */
 
 /**
@@ -43,7 +45,7 @@ function register_minutes_post_type() {
 
 	$board_minute_args = array(
 		'labels'		=> $board_minute_labels,
-		'description'	=> 'Minutes from CIF board meetings.',
+		'description'	=> 'Minutes from HBC board meetings.',
 		'public'		=> true,
 		'menu_position'	=> 5, // Appears below Posts in the admin sidebar
 		'has_archive'	=> true,
@@ -72,7 +74,7 @@ function register_minutes_post_type() {
 
 	$floor_minute_args = array(
 		'labels'		=> $floor_minute_labels,
-		'description'	=> 'Minutes from CIF floor meetings.',
+		'description'	=> 'Minutes from HBC floor meetings.',
 		'public'		=> true,
 		'menu_position'	=> 5, // Appears below Posts in the admin sidebar
 		'has_archive'	=> true,
@@ -184,23 +186,11 @@ add_filter( 'generate_rewrite_rules', 'add_minutes_url_rewrite_rules' );
  * @return array An array of classes to apply to the menu item.
  */
 function add_minutes_current_menu_item_class( $classes = array(), $menu_item = false ) {
-    if ( 'board_minutes' == get_post_type_outside_loop() && 'Meeting Minutes' == $menu_item->title && ! in_array( 'current-menu-item', $classes ) )
+    if ( 'board_minutes' == Extras\get_post_type_outside_loop() && 'Meeting Minutes' == $menu_item->title && ! in_array( 'current-menu-item', $classes ) )
         $classes[] = 'current-menu-item';
 
     return $classes;
 }
 add_filter( 'nav_menu_css_class', 'add_minutes_current_menu_item_class', 10, 2 );
 
-/**
- * Returns the post type for the queried data on the current page.
- * This is useful for loading template parts for custom post types
- * before entering the loop and outputting those posts.
- *
- * @return string The post type of the queried data for the current page.
- */
-function get_post_type_outside_loop() {
-	global $wp_query;
-	if ( isset( $wp_query->query['post_type'] ) )
-		return $wp_query->query['post_type'];
-	return '';
-}
+
