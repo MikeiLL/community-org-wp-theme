@@ -10,14 +10,14 @@ function title() {
     if (get_option('page_for_posts', true)) {
       return get_the_title(get_option('page_for_posts', true));
     } else {
-      return __('Latest Posts', 'immaterial');
+      return __('Latest Posts', 'mz-community-org');
     }
   } elseif (is_archive()) {
     return get_the_archive_title();
   } elseif (is_search()) {
-    return sprintf(__('Search Results for %s', 'immaterial'), get_search_query());
+    return sprintf(__('Search Results for %s', 'mz-community-org'), get_search_query());
   } elseif (is_404()) {
-    return __('Not Found', 'immaterial');
+    return __('Not Found', 'mz-community-org');
   } else {
     return get_the_title();
   }

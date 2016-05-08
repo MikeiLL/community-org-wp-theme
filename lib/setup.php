@@ -18,7 +18,7 @@ function setup() {
 
   // Make theme available for translation
   // Community translations can be found at https://github.com/roots/sage-translations
-  load_theme_textdomain('immaterial', get_template_directory() . '/lang');
+  load_theme_textdomain('mz-community-org', get_template_directory() . '/lang');
 
   // Enable plugins to manage the document title
   // http://codex.wordpress.org/Function_Reference/add_theme_support#Title_Tag
@@ -27,8 +27,8 @@ function setup() {
   // Register wp_nav_menu() menus
   // http://codex.wordpress.org/Function_Reference/register_nav_menus
   register_nav_menus([
-    'primary_navigation' => __('Drawer Navigation', 'immaterial'),
-    'header_navigation' => __('Header Navigation', 'immaterial')
+    'primary_navigation' => __('Drawer Navigation', 'mz-community-org'),
+    'header_navigation' => __('Header Navigation', 'mz-community-org')
   ]);
 
   // Enable post thumbnails
@@ -56,7 +56,7 @@ add_action('after_setup_theme', __NAMESPACE__ . '\\setup');
  */
 function widgets_init() {
   register_sidebar([
-    'name'          => __('Primary', 'immaterial'),
+    'name'          => __('Primary', 'mz-community-org'),
     'id'            => 'sidebar-primary',
     'before_widget' => '<section class="widget %1$s %2$s">',
     'after_widget'  => '</section>',
@@ -65,7 +65,7 @@ function widgets_init() {
   ]);
 
   register_sidebar([
-    'name'          => __('Mini Footer', 'immaterial'),
+    'name'          => __('Mini Footer', 'mz-community-org'),
     'id'            => 'sidebar-mini-footer',
     'before_widget' => '<div class="mdl-mini-footer__left-section">',
     'after_widget'  => '</div>',
@@ -74,7 +74,7 @@ function widgets_init() {
   ]);
 
   register_sidebar([
-    'name'          => __('Mega Footer', 'immaterial'),
+    'name'          => __('Mega Footer', 'mz-community-org'),
     'id'            => 'sidebar-mega-footer',
     'before_title'  => '</div><input class="mdl-mega-footer--heading-checkbox" type="checkbox" checked><h2 class="widget-title mdl-mega-footer--heading">',
     'after_title'   => '</h2><div class="mdl-mega-footer--link-list">',

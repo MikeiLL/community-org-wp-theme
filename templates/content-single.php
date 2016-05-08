@@ -8,7 +8,7 @@
       <?php the_content(); ?>
     </div>
     <footer>
-      <?php wp_link_pages(['before' => '<nav class="page-nav"><p>' . __('Pages:', 'immaterial'), 'after' => '</p></nav>']); ?>
+      <?php wp_link_pages(['before' => '<nav class="page-nav"><p>' . __('Pages:', 'mz-community-org'), 'after' => '</p></nav>']); ?>
     </footer>
     <?php comments_template('/templates/comments.php'); ?>
   </article>
