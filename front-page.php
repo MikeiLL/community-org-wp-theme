@@ -14,36 +14,22 @@
         <div class="mdl-grid">
           <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--6dp">
             <div class="mdl-card__title">
-              <h1 class="mdl-card__title-text">Nursing Home Abuse</h1>
+              <h1 class="mdl-card__title-text">Welcome</h1>
             </div>
             <div class="mdl-card__supporting-text">
-              <p>Elder neglect, or nursing home negligence, most commonly occurs when a resident does not receive proper medical, physical, or emotional attention. As a result, neglect can pose serious risk of harm to victims. In certain cases, neglect may escalate to physical or emotional abuse.</p>
-              <button class="mdl-button mdl-button--raised mdl-button--accent">I can help</button>
-              <button id="lang-switcher" class="mdl-button mdl-js-button mdl-button--icon">
-    <i class="material-icons">language</i>
-</button>
-<ul class="mdl-menu mdl-js-menu mdl-menu--top-right" for="lang-switcher">
-    <li class="mdl-menu__item">English</li>
-    <li class="mdl-menu__item">日本語</li>
-    <li class="mdl-menu__item">한국어</li>
-</ul>
+              <p>We meet on the first Tuesday of each month for one hour at 6:00pm.
+
+              Corner of Z Street and DeSoto
+
+              All welcome and please come.</p>
+              <a href="/contact" class="mdl-button mdl-button--raised mdl-button--accent">Contact Us</a>
+
             </div>
           </div>
         </div>
       </div>
     </div>
 
-	<div class="content-grid mdl-grid" style="height:300px">
-      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-color--yellow-500">
-        One
-      </div>
-      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-color--green-100">
-        Two
-      </div>
-      <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-color--red-100">
-        Three
-      </div>
-  </div>
 
   	<div class="content-grid mdl-grid" style="height:300px">
       <div class="mdl-cell mdl-cell--1-col mdl-color--yellow-50">
@@ -84,39 +70,39 @@
   </div>
 
 <div class="content-grid mdl-grid" style="height:300px">
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-50">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-50">
       50
     </div>
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-100">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-100">
       100
     </div>
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-200">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-200">
       200
     </div>
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-300">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-300">
       300
     </div>
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-400">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-400">
       400
     </div>
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-500">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-500">
       500
     </div>
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-600">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-600">
       600
     </div>
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-700">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-700">
       700
-    </div><div class="mdl-cell mdl-cell--1-col mdl-color--grey-A100">
+    </div><div class="mdl-cell mdl-cell--1-col mdl-color--brown-A100">
       A100
     </div>
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-A200">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-A200">
       A200
     </div>
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-A400">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-A400">
       A400
     </div>
-    <div class="mdl-cell mdl-cell--1-col mdl-color--grey-A700">
+    <div class="mdl-cell mdl-cell--1-col mdl-color--brown-A700">
       A700
     </div>
 </div>
