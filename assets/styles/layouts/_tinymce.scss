@@ -1,3 +1,6 @@
 body#tinymce {
   margin: 12px !important;
 }
+#ui-datepicker-div {
+  z-index: 9999999!important;
+}

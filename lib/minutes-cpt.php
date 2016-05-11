@@ -53,12 +53,13 @@ function register_minutes_post_type() {
 
 	register_post_type( 'board_minutes', $board_minute_args );
 
+//TODO Move me to Extras or specific to CPTs script
   function remove_title_box()
   {
     remove_post_type_support('board_minutes', 'title');
     remove_post_type_support('floor_minutes', 'title');
     remove_post_type_support('board_agenda', 'title');
-    remove_post_type_support('floor_agenda', 'title');
+    remove_post_type_support('general_agenda', 'title');
   }
   add_action("admin_init", "remove_title_box");
 

@@ -56,11 +56,11 @@ function register_agenda_post_type() {
 
 
 	/**
-	 * Register a custom post type for floor meeting agenda.
+	 * Register a custom post type for general meeting agenda.
 	 * See http://codex.wordpress.org/Function_Reference/register_post_type
 	 * for more information on how this works.
 	 */
-	$floor_agenda_labels = array(
+	$general_agenda_labels = array(
 		'name'				 => 'General Meeting Agenda',
 		'singular_name'		 => 'General Meeting Agenda',
 		'add_new_item'		 => 'Add New General Meeting Agenda',
@@ -68,19 +68,19 @@ function register_agenda_post_type() {
 		'new_item'			 => 'New General Meeting Agenda',
 		'view_item'			 => 'View General Meeting Agenda',
 		'search_items'		 => 'Search General Meeting Agenda',
-		'not_found'			 => 'No floor agenda found.',
-		'not_found_in_trash' => 'No floor agenda found in Trash.',
+		'not_found'			 => 'No general agenda found.',
+		'not_found_in_trash' => 'No general agenda found in Trash.',
 	);
 
-	$floor_agenda_args = array(
-		'labels'		=> $floor_agenda_labels,
-		'description'	=> 'Agenda for HBC floor meetings.',
+	$general_agenda_args = array(
+		'labels'		=> $general_agenda_labels,
+		'description'	=> 'Agenda for HBC general meetings.',
 		'public'		=> true,
 		'menu_position'	=> 5, // Appears below Posts in the admin sidebar
 		'has_archive'	=> true,
 	);
 
-	register_post_type( 'general_agenda', $floor_agenda_args );
+	register_post_type( 'general_agenda', $general_agenda_args );
 }
 add_action( 'init', 'register_agenda_post_type' );
 
@@ -110,7 +110,7 @@ add_filter( 'enter_title_here', 'wpb_change_title_text' );
  * @param $post_id The id of the post which was just saved.
  */
 function generate_agenda_post_title( $data, $postarr ) {
-	// Only generate the title for board/floor agenda
+	// Only generate the title for board/general agenda
 	if ( ! ( 'board_agenda' == $data['post_type'] || 'general_agenda' == $data['post_type']) )
 		return $data;
 
@@ -122,9 +122,11 @@ function generate_agenda_post_title( $data, $postarr ) {
 	if ( 'board_agenda' == $data['post_type'] )
 		$new_title = 'Board';
 	else if ( 'general_agenda' == $data['post_type'] )
-		$new_title = 'Floor';
+		$new_title = 'General';
 
-	$new_title .= ' Agenda for ' . get_post_meta($postarr['post_ID'], 'agenda_date_field')[0];
+  $agenda_date_field = get_post_meta($postarr['post_ID'], 'agenda_date_field');
+
+	$new_title .= ' Agenda for ' . $agenda_date_field[0];
 
 	$data['post_title'] = $new_title;
 	$data['post_name'] = sanitize_title( $new_title );
@@ -140,12 +142,18 @@ function add_custom_scripts() {
                 jQuery(function() {';
 
     $output .= 'jQuery(".datepicker").datepicker(
-                      {
-                        dateFormat: "MM dd, yy"
-                      }
+                        {
+                          dateFormat: "MM dd, yy",
+                          beforeShow: function() {
+                            setTimeout(function(){
+                                jQuery(".ui-datepicker").css("z-index", 99999999999999);
+                            }, 0);
+                          }
+                        }
                       );';
 
     $output .= '});
+
         </script>';
 
     echo $output;
@@ -167,7 +175,7 @@ function add_datepicker_meta_box() {
         'date_picker', // $id
         'Select Date of Meeting', // $title
         'display_datepicker_meta_box', // $callback
-        'floor_agenda', // $page
+        'general_agenda', // $page
         'advanced', // $context
         'high'); // $priority
 }
@@ -191,7 +199,7 @@ global $date_meta_field, $post;
 echo '<input type="hidden" name="datepicker_meta_box_nonce" value="'.wp_create_nonce(basename(__FILE__)).'" />';
 
         $meta = get_post_meta($post->ID, $date_meta_field['id'], true);
-         echo '<input type="text" class="datepicker" name="'.$date_meta_field['id'].'" id="'.$date_meta_field['id'].'" value="'.$meta.'" size="30" />
+         echo '<input style="z-index:999; type="text" class="datepicker" name="'.$date_meta_field['id'].'" id="'.$date_meta_field['id'].'" value="'.$meta.'" size="30" />
 			<br /><span class="description">'.$date_meta_field['desc'].'</span>';
 
 }
@@ -207,7 +215,7 @@ function save_custom_meta($post_id) {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
         return $post_id;
     // check permissions
-    if (('board_agenda' == $_POST['post_type']) || ('floor_agenda' == $_POST['post_type'])) {
+    if (('board_agenda' == $_POST['post_type']) || ('general_agenda' == $_POST['post_type'])) {
         if (!current_user_can('edit_page', $post_id))
             return $post_id;
         } elseif (!current_user_can('edit_post', $post_id)) {
@@ -218,6 +226,8 @@ function save_custom_meta($post_id) {
     $new = $_POST[$date_meta_field['id']];
     if ($new && $new != $old) {
         update_post_meta($post_id, $date_meta_field['id'], $new);
+        // We want to update the post even if only this meta field is changed.
+        wp_update_post( $_POST );
     } elseif ('' == $new && $old) {
         delete_post_meta($post_id, $date_meta_field['id'], $old);
     }
@@ -243,7 +253,7 @@ add_filter( 'wp_title', 'agenda_semesterly_archive_title_filter', 10, 3 );
 
 /**
  * Allows WordPress to recognize the semesterly URL structure of the
- * combined Floor and Board Agenda post types' archive page.
+ * combined general and Board Agenda post types' archive page.
  *
  * All URL rewrites are documented inside this function's contents.
  *
