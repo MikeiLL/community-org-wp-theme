@@ -1,1 +1,15 @@
+h1 {
+  @include typo-display-1();
+  }
 
+@media (min-width: 37rem) {
+  h1 {
+    @include typo-display-2();
+  }
+}
+
+@media (min-width: 60rem) {
+  h1 {
+    @include typo-display-3();
+  }
+}

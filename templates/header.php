@@ -20,7 +20,7 @@
       $cleanermenu = wp_nav_menu( array(
         'theme_location' => 'header_navigation',
         'container' => false,
-        'items_wrap' => '<nav class="mdl-navigation mdl-layout--large-screen-only">%3$s</nav>',
+        'items_wrap' => '<nav class="mdl-navigation">%3$s</nav>',
         'echo' => false,
         'depth' => 1,
       ) );
