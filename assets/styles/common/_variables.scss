@@ -7,18 +7,18 @@ $trim-color-classes: false !default;
 
 // Use color primarily for emphasis. Choose colors that fit with
 // your brand and provide good contrast between visual components.
-$color-primary: $palette-brown-500 !default;
-$color-primary-dark: $palette-brown-700 !default;
-$color-accent: $palette-yellow-700 !default;
+$color-primary: $palette-brown-700 !default;
+$color-primary-dark: $palette-brown-900 !default;
+$color-accent: $palette-pink-500 !default;
 
 
 // Our primary is dark, so use $color-dark-contrast for overlaid text.
-$color-primary-contrast: $palette-yellow-500 !default;
+$color-primary-contrast: $palette-grey-50 !default;
 // Our accent is dark, so use $color-dark-contrast for overlaid text.
-$color-accent-contrast: $palette-yellow-500 !default;
+$color-accent-contrast: $palette-grey-100 !default;
 
-$preferred_font: 'Times New Roman', 'Helvetica', 'Arial', sans-serif !default;
-$performance_font: 'Times New Roman', 'Helvetica', 'Arial', sans-serif !default;
+$preferred_font: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
+$performance_font: 'Helvetica', 'Arial', sans-serif !default;
 
 
 

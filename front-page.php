@@ -9,7 +9,7 @@
   <?php //get_template_part('templates/content', 'page'); ?>
 
   <!-- row for wells -->
-		<div class="content-grid mdl-grid mdl-grid--no-spacing mdl-color--blue-100">
+		<div class="content-grid mdl-grid mdl-grid--no-spacing mdl-color--brown-100">
       <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
         <div class="mdl-grid">
           <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--6dp">
