@@ -84,6 +84,19 @@ function register_agenda_post_type() {
 }
 add_action( 'init', 'register_agenda_post_type' );
 
+function wpb_change_title_text( $title ){
+     $screen = get_current_screen();
+     $date = new DateTime($data['post_date_gmt']);
+	   $display_date_string = $date->format( 'F jS, Y' );
+
+     if  ( 'board_agenda' == $screen->post_type ) {
+          $title = 'Month, Day, Year ('.$display_date_string.')';
+     }
+
+     return $title;
+}
+
+add_filter( 'enter_title_here', 'wpb_change_title_text' );
 
 
 /**
@@ -96,14 +109,14 @@ add_action( 'init', 'register_agenda_post_type' );
  *
  * @param $post_id The id of the post which was just saved.
  */
-function generate_agenda_post_title( $data ) {
+function generate_agenda_post_title( $data, $postarr ) {
 	// Only generate the title for board/floor agenda
-	if ( ! ( 'board_agenda' == $data['post_type'] || 'general_agenda' == $data['post_type'] ) )
+	if ( ! ( 'board_agenda' == $data['post_type'] || 'general_agenda' == $data['post_type']) )
 		return $data;
 
 	// Get a human readable meeting date string (Month dd{st/nd/rd/th}, YYYY)
-	$date = new DateTime($data['post_date_gmt']);
-	$meeting_date_string = $date->format( 'F jS, Y' );
+	//$date = new DateTime($data['post_date_gmt']);
+	//$meeting_date_string = $date->format( 'F jS, Y' );
 
 	// Create the new title in the format "Board/General Meeting Agenda for {date}"
 	if ( 'board_agenda' == $data['post_type'] )
@@ -111,16 +124,105 @@ function generate_agenda_post_title( $data ) {
 	else if ( 'general_agenda' == $data['post_type'] )
 		$new_title = 'Floor';
 
-	$new_title .= ' Agenda for ' . $meeting_date_string;
+	$new_title .= ' Agenda for ' . get_post_meta($postarr['post_ID'], 'agenda_date_field')[0];
 
 	$data['post_title'] = $new_title;
-	$data['post_name'] = sanitize_title( $meeting_date_string );
+	$data['post_name'] = sanitize_title( $new_title );
 
 	return $data;
 }
-add_action( 'wp_insert_post_data', 'generate_agenda_post_title' );
+add_action( 'wp_insert_post_data', 'generate_agenda_post_title', '99', 2 );
+
+function add_custom_scripts() {
+    global $custom_meta_fields, $post;
+
+    $output = '<script type="text/javascript">
+                jQuery(function() {';
+
+    $output .= 'jQuery(".datepicker").datepicker(
+                      {
+                        dateFormat: "MM dd, yy"
+                      }
+                      );';
+
+    $output .= '});
+        </script>';
+
+    echo $output;
+}
+add_action('admin_head','add_custom_scripts');
 
 
+// Add the Meta Box
+function add_datepicker_meta_box() {
+    add_meta_box(
+        'date_picker', // $id
+        'Select Date of Meeting', // $title
+        'display_datepicker_meta_box', // $callback
+        'board_agenda', // $page
+        'advanced', // $context
+        'high'); // $priority
+
+    add_meta_box(
+        'date_picker', // $id
+        'Select Date of Meeting', // $title
+        'display_datepicker_meta_box', // $callback
+        'floor_agenda', // $page
+        'advanced', // $context
+        'high'); // $priority
+}
+add_action('add_meta_boxes', 'add_datepicker_meta_box');
+
+wp_enqueue_script('jquery-ui-datepicker');
+wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+
+$prefix = 'agenda_';
+
+$date_meta_field = array(
+        'label'=> 'Displayed as Agenda for Month, Day, Year',
+        'desc'  => 'Will be used to generate title of Agenda.',
+        'id'    => $prefix.'date_field',
+        'type'  => 'date'
+    );
+
+// The Callback
+function display_datepicker_meta_box() {
+global $date_meta_field, $post;
+echo '<input type="hidden" name="datepicker_meta_box_nonce" value="'.wp_create_nonce(basename(__FILE__)).'" />';
+
+        $meta = get_post_meta($post->ID, $date_meta_field['id'], true);
+         echo '<input type="text" class="datepicker" name="'.$date_meta_field['id'].'" id="'.$date_meta_field['id'].'" value="'.$meta.'" size="30" />
+			<br /><span class="description">'.$date_meta_field['desc'].'</span>';
+
+}
+
+// Save the Data
+function save_custom_meta($post_id) {
+    global $date_meta_field;
+
+    // verify nonce
+    if (!wp_verify_nonce($_POST['datepicker_meta_box_nonce'], basename(__FILE__)))
+        return $post_id;
+    // check autosave
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        return $post_id;
+    // check permissions
+    if (('board_agenda' == $_POST['post_type']) || ('floor_agenda' == $_POST['post_type'])) {
+        if (!current_user_can('edit_page', $post_id))
+            return $post_id;
+        } elseif (!current_user_can('edit_post', $post_id)) {
+            return $post_id;
+    }
+
+    $old = get_post_meta($post_id, $date_meta_field['id'], true);
+    $new = $_POST[$date_meta_field['id']];
+    if ($new && $new != $old) {
+        update_post_meta($post_id, $date_meta_field['id'], $new);
+    } elseif ('' == $new && $old) {
+        delete_post_meta($post_id, $date_meta_field['id'], $old);
+    }
+}
+add_action('save_post', 'save_custom_meta');
 /**
  * Filters the HTML title on the combined agenda archive page to always display
  * as "{Semester} {Year} Meeting Agenda".

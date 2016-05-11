@@ -53,7 +53,40 @@ function register_minutes_post_type() {
 
 	register_post_type( 'board_minutes', $board_minute_args );
 
+  function remove_title_box()
+  {
+    remove_post_type_support('board_minutes', 'title');
+    remove_post_type_support('floor_minutes', 'title');
+    remove_post_type_support('board_agenda', 'title');
+    remove_post_type_support('floor_agenda', 'title');
+  }
+  add_action("admin_init", "remove_title_box");
 
+  function brnsville_register_meta_boxes($postType) {
+    $types = array('board_minutes', 'floor_minutes');
+    if(in_array($postType, $types)){
+      add_meta_box(
+          'brnsville-minutes-instruction',
+          'Title Generated Automatically',
+          brnsville_minutes_instruction,
+          $postType,
+          'advanced',
+          'high'
+      );
+    }
+  }
+
+	function brnsville_minutes_instruction() {
+	  echo 'Set Date of Meeting in "Published on" field to the right and Title will be generated automatically.';
+	}
+  add_action( 'add_meta_boxes', 'brnsville_register_meta_boxes' );
+
+  // Move all "advanced" metaboxes above the default editor
+  add_action('edit_form_after_title', function() {
+      global $post, $wp_meta_boxes;
+      do_meta_boxes(get_current_screen(), 'advanced', $post);
+      unset($wp_meta_boxes[get_post_type($post)]['advanced']);
+  });
 
 	/**
 	 * Register a custom post type for floor meeting minutes.
