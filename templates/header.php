@@ -11,7 +11,7 @@
     <!-- Add spacer, to align navigation to the right -->
   </div>
     <!-- Navigation -->
-    <div class="mdl-layout__header-row ">
+    <div class="mdl-layout__header-row mdl-layout__header-row--nav">
     <?php
     if ( has_nav_menu( 'header_navigation' ) ) :
 
