@@ -26,6 +26,16 @@
 
             </div>
           </div>
+          <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--6dp">
+            <div class="mdl-card__title">
+              <h1 class="mdl-card__title-text">News</h1>
+            </div>
+            <div class="mdl-card__supporting-text">
+              <?php while (have_posts()) : the_post(); ?>
+                <?php get_template_part('templates/front-page/posts'); ?>
+              <?php endwhile; ?>
+            </div>
+          </div>
         </div>
       </div>
     </div>
