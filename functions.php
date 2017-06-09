@@ -15,9 +15,7 @@ $sage_includes = [
   'lib/setup.php',     // Theme setup
   'lib/titles.php',    // Page titles
   'lib/wrapper.php',   // Theme wrapper class
-  'lib/customizer.php', // Theme customizer
-  'lib/minutes-cpt.php', // Meeting Minutes CPT
-  'lib/agenda-cpt.php' // Agenda CPT
+  'lib/customizer.php' // Theme customizer
 ];
 
 foreach ($sage_includes as $file) {

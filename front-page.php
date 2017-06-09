@@ -17,11 +17,13 @@
               <h1 class="mdl-card__title-text">Welcome</h1>
             </div>
             <div class="mdl-card__supporting-text">
-              <p>We meet on the first Tuesday of each month for one hour at 6:00pm.
+              <p>We meet on the first Tuesday of each month for one hour at 6:00pm.</p>
 
-              Corner of Z Street and DeSoto
+              <p>At the Brownsville Community Resource Center at 3800 W. DeSoto</p>
 
-              All welcome and please come.</p>
+               <p>The entrance we use is on the West side of the building, facing towards the Mobile Highway Bridge. The door closest to Gonzales Street.</p>
+
+              <p>All welcome and please come.</p>
               <a href="/contact" class="mdl-button mdl-button--raised mdl-button--accent">Contact Us</a>
 
             </div>

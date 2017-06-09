@@ -16,9 +16,8 @@
 
         ?>
 
-      <?php get_the_permalink(); ?>
-      <a href="<?php get_the_permalink();?>"><?php the_title(); ?></a>
-
+      <?php get_the_permalink($post->ID); ?>
+          <h3><?php the_title(); ?></h3>
           <?php echo the_excerpt(); ?>
 
       </a>
