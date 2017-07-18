@@ -1,0 +1,308 @@
+/* Type
+*/
+
+body, html {
+  font-size: 16px;
+}
+
+@font-face {
+	font-family: 'TypewriterLite';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/AmericanTypewriter-Light.ttf');
+}
+
+@font-face {
+	font-family: 'IntroHead';
+	font-style: bold;
+	font-weight: 700;
+	src: url('../fonts/introheadb-h2base-webfont.ttf');
+}
+
+.mdl-layout-title {
+  font-size: 2em;
+  color: green !important;
+}
+
+.entry-content {
+  max-width: 30em;
+  /* Anywhere between 22.5em to 37.5em. Use your discretion */
+  margin-right: .8em;
+}
+
+/**
+ * Text alignment
+ */
+/* line 100, /Users/cferdinandi/Sites/harbor/wordpress/wp-content/themes/harbor-wp-theme/src/sass/components/_overrides.scss */
+.text-center {
+  text-align: center;
+}
+
+.text-shadow {
+    text-shadow: 1px 1px 1px #272727;
+}
+
+
+
+/* Globals */
+
+a {
+	text-decoration: none;
+	color: rgba(125, 149, 155, 1);
+}
+a:hover,
+a:focus {
+	text-decoration: underline;
+}
+
+h3 {
+	font-weight: 100;
+}
+
+img, .wp-caption {
+	height: auto;
+	max-width: 100%;
+}
+
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+pre,
+code {
+	background-color: #eee;
+}
+pre {
+	padding: 1em;
+}
+code {
+	padding: 0 0.2em;
+}
+
+
+/**
+ * Posts
+ */
+.post {
+	padding-bottom: 2em;
+}
+.entry-title a {
+	/* font-size: 2em; */
+	color: #222;
+}
+.entry-title a:hover,
+.entry-title a:focus {
+	color: rgb(61, 146, 201);
+	text-decoration: none;
+}
+.entry-meta {
+	color: #999;
+	font-size: 90%;
+	margin: 0;
+}
+/*.entry-summary,
+.entry-content {
+	font-family: Georgia, "Cambria", serif;
+	color: #444;
+	line-height: 1.8em;
+}*/
+
+ul.post-categories {
+	padding-left: 0;
+	list-style-type: none;
+	display: inline;
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+ul.post-categories li {
+	display: inline;
+}
+
+/**
+ * Page/Post Nav
+ */
+.page-nav,
+.post-nav {
+	display: block;
+	padding: 1em 0;
+	margin-bottom: 2em;
+}
+.page-nav a,
+.post-nav a {
+	text-decoration: none;
+}
+.page-nav .nav-previous,
+.post-nav .nav-previous {
+	float: left;
+}
+.page-nav .nav-next,
+.post-nav .nav-next {
+	float: right;
+}
+
+/**
+ * Footer
+ */
+.site-footer {
+	text-align: center;
+	padding: 1em 0;
+	color: #666;
+}
+.site-footer a {
+	color: #999;
+}
+.site-footer .pure-menu-list li {
+	display: inline-block;
+	padding:.5em 1em;
+}
+.site-footer .pure-menu a:hover,
+.site-footer .pure-menu a:focus {
+	background: none;
+}
+.site-info {
+	padding: 1em;
+}
+
+/**
+ * Comments
+ * Comment styling is intentionally minimal.
+ * I recommend using Disqus, LiveFyre, Intense Debate or another third party comment solution.
+ */
+.comments-area {
+	margin-top: 3em;
+	border-top: 1px solid #eee;
+}
+.comments-area .comments-title {
+	font-size: 1.5em;
+	margin-top: 1em;
+}
+ol.comment-list,
+li.comment > ol.children {
+	list-style-type: none;
+}
+li.comment {
+	display: block;
+}
+.comment-body {
+	margin-bottom: 30px;
+}
+.comment-meta {
+	font-size: 0.8em;
+}
+.comment-meta a {
+	color: #999;
+}
+.comment-reply-title {
+	font-size: 1.25em;
+	margin-bottom: 0.5em;
+}
+.comment-respond {
+	margin-top: 40px;
+}
+.comment-form-comment label {
+	display: block;
+}
+
+@media (min-width: 35.5em) {
+	nav ul li {
+		min-width: 1rem;
+	}
+
+	.site-title {
+	  font-size: 3em;
+	}
+}
+
+
+
+/* Modular Scale */
+$ms-base: 1em;
+$ms-ratio: $minor-third;
+
+/* Typi */
+// See: https://github.com/zellwk/typi
+
+$breakpoints: (
+  small : 35.5em,
+  medium: 60em,
+  large : 100em
+);
+
+@include typi-init;
+
+$typi: (
+      base: (
+      null: (14px, 1.4),
+      small: (16px),
+      large: (20px)
+    ),
+
+    h1-map: (
+      null: (ms(1), 1.2),
+      small: (ms(2), 1.2),
+      medium: (ms(3), 1.2),
+      large: (ms(3), 1.3)
+      ),
+
+    h2-map: (
+      null: (ms(0), 1.2),
+      small: (ms(1), 1.2),
+      medium: (ms(2), 1.2),
+      large: (ms(2), 1.3)
+      ),
+
+    h3-map: (
+      null: (ms(0), 1.2),
+      small: (ms(0), 1.2),
+      medium: (ms(1), 1.2),
+      large: (ms(1), 1.3)
+      ),
+
+    h4-map: (
+      null: (ms(-1), 1.2),
+      small: (ms(-1), 1.2),
+      medium: (ms(0), 1.2),
+      large: (ms(0), 1.3)
+      )
+);
+
+// TODO really address this.
+P {
+  line-height: 1.1em !important;
+}
+
+h1 { @include typi(h1-map) }
+h2 { @include typi(h2-map) }
+h3 { @include typi(h3-map) }
+h4 { @include typi(h4-map) }
+p { @include typi(base) }
+
+
+
+.entry-content p, .entry-summary p {
+  //@include font-size($p-font-sizes);
+  @include typi-base();
+}
+
+
+/* Media Queries */
+
+@media (min-width: map-get($breakpoints, medium)) {
+  .entry-content {
+    max-width: 37.5em;
+    /* Anywhere between 22.5em to 37.5em. Use your discretion */
+  }
+  h1.entry-title {
+    margin: 0.3em 0;
+  }
+  time, p.author, p.byline {
+    margin: 0.3em 0;
+  }
+}
+
+
+
+
+@debug ms-list(-2, 4, $ms-base, $ms-ratio);
